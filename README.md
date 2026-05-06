@@ -1,36 +1,36 @@
 # whatstqr
 
-Generate WhatsApp QR Codes in one line of Python.
+Gere QR Codes de WhatsApp com uma linha de Python.
 
-`whatstqr` is a small Python library that creates local PNG QR Codes pointing to a WhatsApp chat, with or without a pre-filled message.
+`whatstqr` é uma biblioteca Python pequena e direta para criar QR Codes em PNG que abrem uma conversa no WhatsApp, com ou sem mensagem pré-preenchida.
 
-## Why use it?
+## Por que usar?
 
-- Simple API: one function to generate a QR Code
-- Works locally: saves PNG files directly on your machine
-- WhatsApp-ready: builds `wa.me` links correctly
-- Friendly defaults: handles Brazilian numbers without DDI by adding `55`
-- Flexible output: lets you choose folder and file name
+- API simples: uma função para gerar o QR Code
+- Funciona localmente: salva o PNG direto na sua máquina
+- Pronto para WhatsApp: monta links `wa.me` corretamente
+- Boas configurações padrão: adiciona `55` em números brasileiros sem DDI
+- Saída flexível: você escolhe pasta e nome do arquivo
 
-## Installation
+## Instalação
 
-### Local development install
+### Instalação local para desenvolvimento
 
-From the project root:
+Na raiz do projeto:
 
 ```bash
 pip install -e .
 ```
 
-If you use a specific Python executable, install with the same interpreter you will use to run your script:
+Se você usa um executável específico do Python, faça a instalação com o mesmo interpretador que vai executar o seu script:
 
 ```powershell
-& C:\path\to\python.exe -m pip install -e .
+& C:\caminho\para\python.exe -m pip install -e .
 ```
 
-This is important on Windows when you have more than one Python installed.
+Isso é importante no Windows quando existem várias instalações do Python na mesma máquina.
 
-## Quick start
+## Início rápido
 
 ```python
 from whatstqr import create_whatsapp_qr
@@ -45,15 +45,15 @@ qr_path = create_whatsapp_qr(
 print(qr_path)
 ```
 
-Example output:
+Exemplo de saída:
 
 ```text
-C:\your-folder\joao_silva_5511999999999.png
+C:\sua-pasta\joao_silva_5511999999999.png
 ```
 
-## Usage examples
+## Exemplos de uso
 
-### Create a QR Code without a message
+### Criar um QR Code sem mensagem
 
 ```python
 from whatstqr import create_whatsapp_qr
@@ -64,9 +64,9 @@ create_whatsapp_qr(
 )
 ```
 
-This generates a QR Code that opens the WhatsApp chat only.
+Esse exemplo gera um QR Code que abre apenas a conversa no WhatsApp.
 
-### Create a QR Code with a pre-filled message
+### Criar um QR Code com mensagem pré-preenchida
 
 ```python
 from whatstqr import create_whatsapp_qr
@@ -79,9 +79,9 @@ create_whatsapp_qr(
 )
 ```
 
-This generates a QR Code that opens the chat with the message already filled in.
+Esse exemplo gera um QR Code que abre a conversa com a mensagem já preenchida.
 
-### Save the file in another folder
+### Salvar o arquivo em outra pasta
 
 ```python
 from whatstqr import create_whatsapp_qr
@@ -93,7 +93,7 @@ create_whatsapp_qr(
 )
 ```
 
-### Use a custom file name
+### Usar um nome de arquivo personalizado
 
 ```python
 from whatstqr import create_whatsapp_qr
@@ -105,7 +105,7 @@ create_whatsapp_qr(
 )
 ```
 
-The library will save the file as `qr_maria_final.png`.
+A biblioteca salvará o arquivo como `qr_maria_final.png`.
 
 ## API
 
@@ -120,54 +120,54 @@ create_whatsapp_qr(
 ) -> Path
 ```
 
-### Parameters
+### Parâmetros
 
-- `phone_number`: WhatsApp number to use in the QR Code
-- `contact_name`: contact name used to build the output file name
-- `include_message`: if `True`, adds a pre-filled message to the WhatsApp link
-- `message_text`: message content used when `include_message=True`
-- `output_dir`: folder where the PNG file will be saved
-- `file_name`: custom file name for the generated PNG
+- `phone_number`: número de WhatsApp usado no QR Code
+- `contact_name`: nome do contato usado para montar o nome do arquivo
+- `include_message`: se `True`, adiciona uma mensagem pré-preenchida ao link do WhatsApp
+- `message_text`: conteúdo da mensagem usado quando `include_message=True`
+- `output_dir`: pasta onde o PNG será salvo
+- `file_name`: nome personalizado para o arquivo gerado
 
-### Return value
+### Retorno
 
-- Returns a `Path` pointing to the generated PNG file
+- Retorna um `Path` apontando para o arquivo PNG gerado
 
-## Phone number behavior
+## Comportamento do número
 
-The library normalizes the phone number before generating the URL:
+A biblioteca normaliza o número antes de gerar a URL:
 
-- Removes spaces, `+`, parentheses, and dashes
-- If the number has 10 or 11 digits, it assumes Brazil and prefixes `55`
-- If the number already has DDI, it preserves the informed value
-- Rejects invalid numbers that are too short
+- Remove espaços, `+`, parênteses e hífens
+- Se o número tiver 10 ou 11 dígitos, assume Brasil e adiciona `55`
+- Se o número já vier com DDI, preserva o valor informado
+- Rejeita números inválidos ou curtos demais
 
-## File naming behavior
+## Comportamento do nome do arquivo
 
-By default, the file name is built like this:
+Por padrão, o nome do arquivo é montado assim:
 
 ```text
-{sanitized_contact_name}_{normalized_phone}.png
+{nome_sanitizado}_{numero_normalizado}.png
 ```
 
-Example:
+Exemplo:
 
 ```text
 joao_silva_5511999999999.png
 ```
 
-Invalid filename characters are sanitized automatically to keep the output safe on Windows.
+Caracteres inválidos são sanitizados automaticamente para manter o nome do arquivo seguro no Windows.
 
-## Running tests
+## Rodando os testes
 
-From the project root:
+Na raiz do projeto:
 
-```bash
+```powershell
 $env:PYTHONPATH = "src"
 python -m unittest discover -s tests -v
 ```
 
-## Project structure
+## Estrutura do projeto
 
 ```text
 simple_whatstqr/
@@ -181,14 +181,14 @@ simple_whatstqr/
 └── README.md
 ```
 
-## Publishing notes
+## Antes de publicar no GitHub
 
-Before publishing this repository on GitHub, you should:
+Antes de publicar este repositório, vale fazer estes ajustes:
 
-1. Replace the placeholder GitHub URLs in `pyproject.toml`
-2. Update the copyright line in `LICENSE` if needed
-3. Create your GitHub repository and push the project
+1. Trocar as URLs de exemplo em `pyproject.toml` pelas URLs reais do seu GitHub
+2. Atualizar a linha de copyright no `LICENSE`, se quiser
+3. Criar o repositório no GitHub e subir o projeto
 
-## License
+## Licença
 
 MIT
